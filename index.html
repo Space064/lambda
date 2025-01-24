@@ -2,12 +2,41 @@
 <html>
 <head>
     <title>Welcome!</title>
+    <style>
+        /* Full-page centering */
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Centering content inside a container */
+        .container {
+            text-align: center;
+        }
+
+        /* Style input and button */
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
     <script>
         async function checkPassword() {
             const response = await fetch('pass1.html');
             const correctPass = await response.text();
             const userInput = document.getElementById('password').value;
-            
+
             if (userInput.trim() === correctPass.trim()) {
                 window.location.href = 'puzzle1.html';
             } else {
@@ -16,12 +45,12 @@
         }
     </script>
 </head>
-<body bgcolor="black" align="center">
-    <font color="white">
+<body>
+    <div class="container">
         <h1>Welcome</h1>
         <p>Enter the secret keyword:</p>
         <input type="text" id="password">
         <button onclick="checkPassword()">Submit</button>
-    </font>
+    </div>
 </body>
 </html>
