@@ -78,11 +78,11 @@
         let audio; // Declare globally
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Initialize audio variables for 1.wav, 2.wav, and 3.wav
+            // Initialize audio variables for 1.wav, 2.wav, and audio2.wav (renamed to be more consistent)
             const audioFiles = {
                 1: new Audio('1.wav'),
                 2: new Audio('2.wav'),
-                3: new Audio('3.wav')
+                audio2: new Audio('audio2.wav') // Changed to match the requested behavior
             };
 
             let currentAudio = null; // Keep track of the current audio playing
@@ -108,24 +108,24 @@
                 }
             }
 
-            // Reset button to "Play" when music ends
-            audioFiles[2].addEventListener("ended", function() { // Only for audio2.wav
+            // Reset button to "Play" when music ends (only for audio2.wav)
+            audioFiles.audio2.addEventListener("ended", function() {
                 progressBar.value = 0; // Reset progress bar
-                updateTimeDisplay(0, audioFiles[2].duration);
+                updateTimeDisplay(0, audioFiles.audio2.duration);
             });
 
             // Update progress bar and timer as audio plays (only for audio2.wav)
-            audioFiles[2].addEventListener("timeupdate", function() {
-                if (currentAudio === audioFiles[2]) {
-                    progressBar.value = (audioFiles[2].currentTime / audioFiles[2].duration) || 0;
-                    updateTimeDisplay(audioFiles[2].currentTime, audioFiles[2].duration);
+            audioFiles.audio2.addEventListener("timeupdate", function() {
+                if (currentAudio === audioFiles.audio2) {
+                    progressBar.value = (audioFiles.audio2.currentTime / audioFiles.audio2.duration) || 0;
+                    updateTimeDisplay(audioFiles.audio2.currentTime, audioFiles.audio2.duration);
                 }
             });
 
             // Seek to new position when progress bar is changed (only for audio2.wav)
             progressBar.addEventListener("input", function() {
-                if (currentAudio === audioFiles[2]) {
-                    audioFiles[2].currentTime = progressBar.value * audioFiles[2].duration;
+                if (currentAudio === audioFiles.audio2) {
+                    audioFiles.audio2.currentTime = progressBar.value * audioFiles.audio2.duration;
                 }
             });
 
@@ -148,8 +148,8 @@
             }
 
             // Set initial time display for audio2.wav
-            audioFiles[2].addEventListener("loadedmetadata", function() {
-                updateTimeDisplay(0, audioFiles[2].duration);
+            audioFiles.audio2.addEventListener("loadedmetadata", function() {
+                updateTimeDisplay(0, audioFiles.audio2.duration);
             });
 
             // Set initial volume percentage
@@ -160,18 +160,17 @@
                 currentAudio = audioFiles[1];
                 playPauseAudio(currentAudio);
             });
+
+            // Button "2" will now play 2.wav (not audio2.wav)
             document.getElementById("playAudio2").addEventListener("click", function() {
                 currentAudio = audioFiles[2];
                 playPauseAudio(currentAudio);
-            });
-            document.getElementById("playAudio3").addEventListener("click", function() {
-                currentAudio = audioFiles[3];
-                playPauseAudio(currentAudio);
+                progressBar.value = 0; // Reset the progress bar
             });
 
             // Play the "Play" button audio as audio2.wav
             playPauseBtn.addEventListener("click", function() {
-                currentAudio = audioFiles[2];
+                currentAudio = audioFiles.audio2;
                 playPauseAudio(currentAudio);
             });
         });
