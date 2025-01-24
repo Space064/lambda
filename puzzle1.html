@@ -78,12 +78,12 @@
         let audio; // Declare globally
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Initialize audio variables for 1.wav, 2.wav, 3.wav, and audio2.wav (renamed to be more consistent)
+            // Initialize audio variables for 1.wav, 2.wav, 3.wav, and audio2.wav
             const audioFiles = {
-                1: new Audio('1.wav'),
-                2: new Audio('2.wav'),
-                3: new Audio('3.wav'), // Added audio file for 3.wav
-                audio2: new Audio('audio2.wav') // Changed to match the requested behavior
+                1: new Audio('2.wav'), // Changed to play 2.wav on button 1
+                2: new Audio('1.wav'), // Changed to play 1.wav on button 2
+                3: new Audio('3.wav'), // Audio file for button 3
+                audio2: new Audio('audio2.wav') // Audio file for play button
             };
 
             let currentAudio = null; // Keep track of the current audio playing
@@ -158,13 +158,13 @@
 
             // Play buttons for audio 1, 2, 3
             document.getElementById("playAudio1").addEventListener("click", function() {
-                currentAudio = audioFiles[1];
+                currentAudio = audioFiles[1]; // Button 1 plays 2.wav
                 playPauseAudio(currentAudio);
             });
 
-            // Button "2" will now play 2.wav (not audio2.wav)
+            // Button "2" now plays 1.wav
             document.getElementById("playAudio2").addEventListener("click", function() {
-                currentAudio = audioFiles[2];
+                currentAudio = audioFiles[2]; // Button 2 plays 1.wav
                 playPauseAudio(currentAudio);
                 progressBar.value = 0; // Reset the progress bar
             });
@@ -208,9 +208,9 @@
 
         <!-- Audio Buttons for 1.wav, 2.wav, 3.wav -->
         <div class="audio-buttons">
-            <button id="playAudio1">1</button>
-            <button id="playAudio2">2</button>
-            <button id="playAudio3">3</button>
+            <button id="playAudio1">1</button> <!-- Plays 2.wav -->
+            <button id="playAudio2">2</button> <!-- Plays 1.wav -->
+            <button id="playAudio3">3</button> <!-- Plays 3.wav -->
         </div>
 
         <!-- Audio Controls Section wrapped in a box -->
