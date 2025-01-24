@@ -34,6 +34,14 @@
         button {
             cursor: pointer;
         }
+
+        /* Styling for the binary string */
+        .code {
+            font-size: 30px;
+            color: #00c000; /* Green color for the binary string */
+            font-family: monospace;
+            margin-bottom: 20px;
+        }
     </style>
     <script>
         async function checkPassword() {
@@ -54,7 +62,7 @@
         <!-- Keyword Section -->
         <div class="keyword-container">
             <h1>Good job! Next puzzle:</h1>
-            <p color="#00c000">01100111 01101111 01101001 01101110 01100111 01100100 01100101 01100101 01110000 01100101 01110010</p>
+            <p class="code">01100111 01101111 01101001 01101110 01100111 01100100 01100101 01100101 01110000 01100101 01110010</p>
             <p>Enter the secret keyword:</p>
             <input type="text" id="password">
             <button onclick="checkPassword()">Submit</button>
@@ -62,4 +70,3 @@
     </div>
 </body>
 </html>
-
