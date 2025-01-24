@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome!</title>
+    <title>Puzzle 3</title>
     <style>
         /* Full-page centering */
         body {
@@ -37,12 +37,12 @@
     </style>
     <script>
         async function checkPassword() {
-            const response = await fetch('pass2.html'); // Changed to pass2.html
+            const response = await fetch('pass3.html'); // Changed to pass2.html
             const correctPass = await response.text();
             const userInput = document.getElementById('password').value;
 
             if (userInput.trim() === correctPass.trim()) {
-                window.location.href = 'puzzle2.html'; // Changed to puzzle2.html
+                window.location.href = 'puzzle3.html'; // Changed to puzzle2.html
             } else {
                 alert('Incorrect password. Try again!');
             }
@@ -53,7 +53,7 @@
     <div class="container">
         <!-- Keyword Section -->
         <div class="keyword-container">
-            <h1>Welcome</h1>
+            <h1>Good job! Next puzzle:</h1>
             <p>Enter the secret keyword:</p>
             <input type="text" id="password">
             <button onclick="checkPassword()">Submit</button>
