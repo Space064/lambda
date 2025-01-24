@@ -78,10 +78,11 @@
         let audio; // Declare globally
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Initialize audio variables for 1.wav, 2.wav, and audio2.wav (renamed to be more consistent)
+            // Initialize audio variables for 1.wav, 2.wav, 3.wav, and audio2.wav (renamed to be more consistent)
             const audioFiles = {
                 1: new Audio('1.wav'),
                 2: new Audio('2.wav'),
+                3: new Audio('3.wav'), // Added audio file for 3.wav
                 audio2: new Audio('audio2.wav') // Changed to match the requested behavior
             };
 
@@ -172,6 +173,13 @@
             playPauseBtn.addEventListener("click", function() {
                 currentAudio = audioFiles.audio2;
                 playPauseAudio(currentAudio);
+            });
+
+            // Play button for audio 3 (plays 3.wav)
+            document.getElementById("playAudio3").addEventListener("click", function() {
+                currentAudio = audioFiles[3];
+                playPauseAudio(currentAudio);
+                progressBar.value = 0; // Reset the progress bar
             });
         });
 
