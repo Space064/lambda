@@ -25,12 +25,16 @@
             margin-bottom: 40px; /* More space between keyword input and audio controls */
         }
 
-        /* Audio controls */
-        .audio-container {
+        /* Audio controls wrapper box */
+        .audio-controls-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            border: 2px solid #aaa; /* Thin grey border */
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #222; /* Slightly darker background */
         }
 
         /* Arrange play button, progress bar, and timer in one row */
@@ -55,42 +59,9 @@
             width: 200px;
         }
 
-        /* Volume control wrapper with thin grey box */
-        .volume-wrapper {
-            display: flex;
-            align-items: center;
-            padding: 5px;
-            border: 1px solid #aaa; /* Thin grey border */
-            border-radius: 5px;
-            background-color: #222; /* Slightly darker background for volume controls */
-            margin-top: 10px;
-        }
-
-        /* Volume control styling */
+        /* Volume control */
         #volume {
             width: 100px;
-            -webkit-appearance: none;
-            appearance: none;
-            background-color: #ddd; /* Grey background */
-            height: 8px;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        #volume::-webkit-slider-runnable-track {
-            background-color: #ddd; /* Grey background for the track */
-            height: 8px;
-            border-radius: 5px;
-        }
-
-        #volume::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            background-color: #333; /* Dark grey thumb */
-            border-radius: 50%;
-            cursor: pointer;
         }
 
         /* Volume percentage */
@@ -190,8 +161,8 @@
             <button onclick="checkPassword()">Submit</button>
         </div>
 
-        <!-- Audio Controls Section -->
-        <div class="audio-container">
+        <!-- Audio Controls Section wrapped in a box -->
+        <div class="audio-controls-wrapper">
             <button id="playPauseBtn">Play</button>
 
             <!-- Progress Bar and Timer -->
@@ -200,8 +171,8 @@
                 <span id="timeDisplay">0:00 / 0:00</span>
             </div>
 
-            <!-- Volume Slider and Percentage wrapped in a thin grey box -->
-            <div class="volume-wrapper">
+            <!-- Volume Slider and Percentage -->
+            <div class="progress-container">
                 <label for="volume">Volume:</label>
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
                 <span id="volume-percentage">100%</span>
