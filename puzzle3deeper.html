@@ -19,46 +19,12 @@
         .container {
             text-align: center;
         }
-
-        /* Keyword section */
-        .keyword-container {
-            margin-bottom: 40px; /* More space between keyword input and audio controls */
-        }
-
-        /* Style input, buttons */
-        input, button {
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        button {
-            cursor: pointer;
-        }
     </style>
-    <script>
-        async function checkPassword() {
-            const response = await fetch('pass3.html'); // Changed to pass2.html
-            const correctPass = await response.text();
-            const userInput = document.getElementById('password').value;
-
-            if (userInput.trim() === correctPass.trim()) {
-                window.location.href = 'puzzle3.html'; // Changed to puzzle2.html
-            } else {
-                alert('Incorrect password. Try again!');
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container">
         <!-- Keyword Section -->
-        <div class="keyword-container">
-            <h1>Good job! Next puzzle:</h1>
-            <p>Enter the secret keyword:</p>
-            <input type="text" id="password">
-            <button onclick="checkPassword()">Submit</button>
-        </div>
+        <h6>Good job! Next puzzle:</h6>
     </div>
 </body>
 </html>
-
