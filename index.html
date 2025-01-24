@@ -8,19 +8,19 @@
             background-color: black;
             color: white;
             display: flex;
-            justify-content: center; /* Centers horizontally */
-            align-items: center; /* Centers vertically */
-            height: 100vh; /* Full height of the viewport */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            flex-direction: column;
         }
 
-        /* Centering content inside a container */
         .container {
             text-align: center;
         }
 
-        /* Style input and button */
+        /* Style input, button, and volume slider */
         input, button {
             padding: 10px;
             font-size: 16px;
@@ -30,8 +30,38 @@
         button {
             cursor: pointer;
         }
+
+        /* Volume control styling */
+        .volume-container {
+            margin-top: 20px;
+        }
     </style>
     <script>
+        let audio; // Declare globally
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize audio
+            audio = new Audio('music.mp3'); // Change this to your music file
+            audio.loop = true;
+            audio.volume = 1.0; // Default volume at 100%
+            
+            // Play/pause functionality
+            document.getElementById("playPauseBtn").addEventListener("click", function() {
+                if (audio.paused) {
+                    audio.play();
+                    this.textContent = "Pause Music";
+                } else {
+                    audio.pause();
+                    this.textContent = "Play Music";
+                }
+            });
+
+            // Volume control
+            document.getElementById("volume").addEventListener("input", function() {
+                audio.volume = this.value;
+            });
+        });
+
         async function checkPassword() {
             const response = await fetch('pass1.html');
             const correctPass = await response.text();
@@ -51,6 +81,14 @@
         <p>Enter the secret keyword:</p>
         <input type="text" id="password">
         <button onclick="checkPassword()">Submit</button>
+
+        <!-- Play/Pause Music Button -->
+        <div class="volume-container">
+            <button id="playPauseBtn">Play Music</button>
+            <br><br>
+            <label for="volume">Volume:</label>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+        </div>
     </div>
 </body>
 </html>
