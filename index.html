@@ -1,10 +1,27 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    title Welcome!
-  </head>
-  <body bgcolor="black" align="center">
+<head>
+    <title>Welcome!</title>
+    <script>
+        async function checkPassword() {
+            const response = await fetch('pass1.html');
+            const correctPass = await response.text();
+            const userInput = document.getElementById('password').value;
+            
+            if (userInput.trim() === correctPass.trim()) {
+                window.location.href = 'puzzle1.html';
+            } else {
+                alert('Incorrect password. Try again!');
+            }
+        }
+    </script>
+</head>
+<body bgcolor="black" align="center">
     <font color="white">
-      <h1>Welcome</h1>
+        <h1>Welcome</h1>
+        <p>Enter the secret keyword:</p>
+        <input type="text" id="password">
+        <button onclick="checkPassword()">Submit</button>
     </font>
-  </body>
+</body>
 </html>
