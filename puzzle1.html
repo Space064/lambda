@@ -77,6 +77,7 @@
     <script>
         let audio; // Declare globally
         let isPlaying = false; // Track if audio is playing
+        let currentAudio = null; // Track the current audio being played
 
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize audio variables for 1.wav, 2.wav, 3.wav, and audio2.wav
@@ -86,8 +87,6 @@
                 3: new Audio('3.wav'), // Audio file for button 3
                 audio2: new Audio('audio2.wav') // Audio file for play button
             };
-
-            let currentAudio = null; // Keep track of the current audio playing
 
             // Set initial volume for all audio files
             for (let key in audioFiles) {
@@ -101,7 +100,7 @@
             const volumePercentage = document.getElementById("volume-percentage");
             const timeDisplay = document.getElementById("timeDisplay");
 
-            // Play/Pause functionality for the buttons
+            // Play/Pause functionality for the buttons (only for audio2.wav)
             function playPauseAudio(file) {
                 if (file.paused) {
                     file.play();
@@ -163,25 +162,17 @@
 
             // Play buttons for audio 1, 2, 3
             document.getElementById("playAudio1").addEventListener("click", function() {
-                // Stop current audio if any is playing
-                if (currentAudio && currentAudio !== audioFiles.audio2) {
-                    currentAudio.pause();
-                }
-
-                currentAudio = audioFiles[1]; // Button 1 plays 2.wav
+                // Play button 1 (plays 2.wav)
+                currentAudio = audioFiles[1];
                 currentAudio.play();
                 playPauseBtn.textContent = "Play"; // Keep the "Play" button text
                 isPlaying = false;
             });
 
-            // Button "2" now plays 1.wav
+            // Button "2" plays 1.wav
             document.getElementById("playAudio2").addEventListener("click", function() {
-                // Stop current audio if any is playing
-                if (currentAudio && currentAudio !== audioFiles.audio2) {
-                    currentAudio.pause();
-                }
-
-                currentAudio = audioFiles[2]; // Button 2 plays 1.wav
+                // Play button 2 (plays 1.wav)
+                currentAudio = audioFiles[2];
                 currentAudio.play();
                 playPauseBtn.textContent = "Play"; // Keep the "Play" button text
                 isPlaying = false;
@@ -199,12 +190,8 @@
 
             // Play button for audio 3 (plays 3.wav)
             document.getElementById("playAudio3").addEventListener("click", function() {
-                // Stop current audio if any is playing
-                if (currentAudio && currentAudio !== audioFiles.audio2) {
-                    currentAudio.pause();
-                }
-
-                currentAudio = audioFiles[3]; // Button 3 plays 3.wav
+                // Play button 3 (plays 3.wav)
+                currentAudio = audioFiles[3];
                 currentAudio.play();
                 playPauseBtn.textContent = "Play"; // Keep the "Play" button text
                 isPlaying = false;
