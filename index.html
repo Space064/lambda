@@ -13,27 +13,34 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            flex-direction: column;
         }
 
         .container {
             text-align: center;
         }
 
+        /* Arrange elements in a row */
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between items */
+            margin-top: 10px;
+        }
+
         /* Style input, button, and volume slider */
         input, button {
             padding: 10px;
             font-size: 16px;
-            margin-top: 10px;
         }
 
         button {
             cursor: pointer;
         }
 
-        /* Volume control styling */
-        .volume-container {
-            margin-top: 20px;
+        /* Make volume slider more visible */
+        input[type="range"] {
+            width: 100px;
         }
     </style>
     <script>
@@ -41,18 +48,20 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize audio
-            audio = new Audio('audio1.wav'); // Change this to your music file
-            audio.loop = false;
+            audio = new Audio('music.mp3'); // Change this to your music file
             audio.volume = 1.0; // Default volume at 100%
+            audio.loop = false; // Disable looping
             
-            // Play/pause functionality
-            document.getElementById("playPauseBtn").addEventListener("click", function() {
+            const playPauseBtn = document.getElementById("playPauseBtn");
+
+            // Play/Pause functionality
+            playPauseBtn.addEventListener("click", function() {
                 if (audio.paused) {
                     audio.play();
-                    this.textContent = "Pause";
+                    playPauseBtn.textContent = "Pause";
                 } else {
                     audio.pause();
-                    this.textContent = "Play";
+                    playPauseBtn.textContent = "Play";
                 }
             });
 
@@ -78,14 +87,15 @@
 <body>
     <div class="container">
         <h1>Welcome</h1>
-        <p>Enter the secret keyword:</p>
-        <input type="text" id="password">
-        <button onclick="checkPassword()">Submit</button>
 
-        <!-- Play/Pause Music Button -->
-        <div class="volume-container">
+        <div class="row">
+            <p>Enter the secret keyword:</p>
+            <input type="text" id="password">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+
+        <div class="row">
             <button id="playPauseBtn">Play</button>
-            <br><br>
             <label for="volume">Volume:</label>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
         </div>
