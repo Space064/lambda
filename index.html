@@ -4,23 +4,14 @@
     <title>Welcome!</title>
     <script>
         async function checkPassword() {
-            try {
-                const response = await fetch('pass1.txt');
-                let correctPass = await response.text();
-
-                // Trim to remove extra spaces or new lines
-                correctPass = correctPass.trim();
-
-                const userInput = document.getElementById('password').value.trim();
-
-                if (userInput === correctPass) {
-                    window.location.href = 'puzzle1.html';
-                } else {
-                    alert('Incorrect password. Try again!');
-                }
-            } catch (error) {
-                console.error('Error fetching password:', error);
-                alert('Error loading password file.');
+            const response = await fetch('pass1.html');
+            const correctPass = await response.text();
+            const userInput = document.getElementById('password').value;
+            
+            if (userInput.trim() === correctPass.trim()) {
+                window.location.href = 'puzzle1.html';
+            } else {
+                alert('Incorrect password. Try again!');
             }
         }
     </script>
