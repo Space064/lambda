@@ -109,23 +109,23 @@
             }
 
             // Reset button to "Play" when music ends
-            for (let key in audioFiles) {
-                audioFiles[key].addEventListener("ended", function() {
-                    progressBar.value = 0; // Reset progress bar
-                    updateTimeDisplay(0, audioFiles[key].duration);
-                });
+            audioFiles[2].addEventListener("ended", function() { // Only for audio2.wav
+                progressBar.value = 0; // Reset progress bar
+                updateTimeDisplay(0, audioFiles[2].duration);
+            });
 
-                // Update progress bar and timer as audio plays
-                audioFiles[key].addEventListener("timeupdate", function() {
-                    progressBar.value = (audioFiles[key].currentTime / audioFiles[key].duration) || 0;
-                    updateTimeDisplay(audioFiles[key].currentTime, audioFiles[key].duration);
-                });
-            }
+            // Update progress bar and timer as audio plays (only for audio2.wav)
+            audioFiles[2].addEventListener("timeupdate", function() {
+                if (currentAudio === audioFiles[2]) {
+                    progressBar.value = (audioFiles[2].currentTime / audioFiles[2].duration) || 0;
+                    updateTimeDisplay(audioFiles[2].currentTime, audioFiles[2].duration);
+                }
+            });
 
-            // Seek to new position when progress bar is changed
+            // Seek to new position when progress bar is changed (only for audio2.wav)
             progressBar.addEventListener("input", function() {
-                if (currentAudio) {
-                    currentAudio.currentTime = progressBar.value * currentAudio.duration;
+                if (currentAudio === audioFiles[2]) {
+                    audioFiles[2].currentTime = progressBar.value * audioFiles[2].duration;
                 }
             });
 
@@ -147,17 +147,15 @@
                 timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
             }
 
-            // Set initial time display
-            for (let key in audioFiles) {
-                audioFiles[key].addEventListener("loadedmetadata", function() {
-                    updateTimeDisplay(0, audioFiles[key].duration);
-                });
-            }
+            // Set initial time display for audio2.wav
+            audioFiles[2].addEventListener("loadedmetadata", function() {
+                updateTimeDisplay(0, audioFiles[2].duration);
+            });
 
             // Set initial volume percentage
             volumePercentage.textContent = "100%";
 
-            // Play buttons for audio 1, 2, and 3
+            // Play buttons for audio 1, 2, 3
             document.getElementById("playAudio1").addEventListener("click", function() {
                 currentAudio = audioFiles[1];
                 playPauseAudio(currentAudio);
@@ -168,6 +166,12 @@
             });
             document.getElementById("playAudio3").addEventListener("click", function() {
                 currentAudio = audioFiles[3];
+                playPauseAudio(currentAudio);
+            });
+
+            // Play the "Play" button audio as audio2.wav
+            playPauseBtn.addEventListener("click", function() {
+                currentAudio = audioFiles[2];
                 playPauseAudio(currentAudio);
             });
         });
@@ -197,9 +201,9 @@
 
         <!-- Audio Buttons for 1.wav, 2.wav, 3.wav -->
         <div class="audio-buttons">
-            <button id="playAudio1">Play 1.wav</button>
-            <button id="playAudio2">Play 2.wav</button>
-            <button id="playAudio3">Play 3.wav</button>
+            <button id="playAudio1">1</button>
+            <button id="playAudio2">2</button>
+            <button id="playAudio3">3</button>
         </div>
 
         <!-- Audio Controls Section wrapped in a box -->
