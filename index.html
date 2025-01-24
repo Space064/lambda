@@ -50,14 +50,46 @@
             cursor: pointer;
         }
 
-        /* Progress bar */
+        /* Grey Progress Bar */
         #progress {
             width: 200px;
+            background-color: #ddd; /* Grey color */
+            border-radius: 5px;
         }
 
-        /* Volume control */
+        #progress::-webkit-progress-bar {
+            background-color: #ddd; /* Grey color for the bar */
+        }
+
+        #progress::-webkit-progress-value {
+            background-color: #333; /* Darker grey for the progress value */
+        }
+
+        /* Volume control styling */
         #volume {
             width: 100px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #ddd; /* Grey background */
+            height: 8px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #volume::-webkit-slider-runnable-track {
+            background-color: #ddd; /* Grey background for the track */
+            height: 8px;
+            border-radius: 5px;
+        }
+
+        #volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background-color: #333; /* Dark grey thumb */
+            border-radius: 50%;
+            cursor: pointer;
         }
 
         /* Volume percentage */
