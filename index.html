@@ -20,17 +20,24 @@
             text-align: center;
         }
 
-        /* Keyword section styling */
+        /* Keyword section */
         .keyword-container {
-            margin-bottom: 40px; /* More space between keyword and audio controls */
+            margin-bottom: 40px; /* More space between keyword input and audio controls */
         }
 
-        /* Audio controls section */
+        /* Audio controls */
         .audio-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
+        }
+
+        /* Arrange play button, progress bar, and timer in one row */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between elements */
         }
 
         /* Style input, buttons, and sliders */
@@ -43,9 +50,14 @@
             cursor: pointer;
         }
 
-        /* Style for progress bar */
-        input[type="range"] {
+        /* Progress bar */
+        #progress {
             width: 200px;
+        }
+
+        /* Volume control */
+        #volume {
+            width: 100px;
         }
     </style>
     <script>
@@ -53,13 +65,14 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize audio
-            audio = new Audio('audio1.wav'); // Change this to your music file
+            audio = new Audio('audio1.wav'); // Changed file name to audio1.wav
             audio.volume = 1.0; // Default volume at 100%
             audio.loop = false; // Disable looping
             
             const playPauseBtn = document.getElementById("playPauseBtn");
             const progressBar = document.getElementById("progress");
             const volumeSlider = document.getElementById("volume");
+            const timeDisplay = document.getElementById("timeDisplay");
 
             // Play/Pause functionality
             playPauseBtn.addEventListener("click", function() {
@@ -76,14 +89,16 @@
             audio.addEventListener("ended", function() {
                 playPauseBtn.textContent = "Play";
                 progressBar.value = 0; // Reset progress bar
+                updateTimeDisplay(0, audio.duration);
             });
 
-            // Update progress bar as audio plays
+            // Update progress bar and timer as audio plays
             audio.addEventListener("timeupdate", function() {
                 progressBar.value = (audio.currentTime / audio.duration) || 0;
+                updateTimeDisplay(audio.currentTime, audio.duration);
             });
 
-            // Seek to new position when progress bar is clicked
+            // Seek to new position when progress bar is changed
             progressBar.addEventListener("input", function() {
                 audio.currentTime = progressBar.value * audio.duration;
             });
@@ -91,6 +106,21 @@
             // Volume control
             volumeSlider.addEventListener("input", function() {
                 audio.volume = this.value;
+            });
+
+            // Function to update time display (mm:ss format)
+            function updateTimeDisplay(currentTime, duration) {
+                const formatTime = (time) => {
+                    const minutes = Math.floor(time / 60);
+                    const seconds = Math.floor(time % 60);
+                    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+                };
+                timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+            }
+
+            // Set initial time display
+            audio.addEventListener("loadedmetadata", function() {
+                updateTimeDisplay(0, audio.duration);
             });
         });
 
@@ -120,7 +150,14 @@
         <!-- Audio Controls Section -->
         <div class="audio-container">
             <button id="playPauseBtn">Play</button>
-            <input type="range" id="progress" min="0" max="1" step="0.01" value="0">
+
+            <!-- Progress Bar and Timer -->
+            <div class="progress-container">
+                <input type="range" id="progress" min="0" max="1" step="0.01" value="0">
+                <span id="timeDisplay">0:00 / 0:00</span>
+            </div>
+
+            <!-- Volume Slider -->
             <label for="volume">Volume:</label>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
         </div>
