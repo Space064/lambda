@@ -163,17 +163,28 @@
 
             // Play buttons for audio 1, 2, 3
             document.getElementById("playAudio1").addEventListener("click", function() {
+                // Stop current audio if any is playing
+                if (currentAudio && currentAudio !== audioFiles.audio2) {
+                    currentAudio.pause();
+                }
+
                 currentAudio = audioFiles[1]; // Button 1 plays 2.wav
-                playPauseAudio(currentAudio);
-                isPlaying = true;
+                currentAudio.play();
+                playPauseBtn.textContent = "Play"; // Keep the "Play" button text
+                isPlaying = false;
             });
 
             // Button "2" now plays 1.wav
             document.getElementById("playAudio2").addEventListener("click", function() {
+                // Stop current audio if any is playing
+                if (currentAudio && currentAudio !== audioFiles.audio2) {
+                    currentAudio.pause();
+                }
+
                 currentAudio = audioFiles[2]; // Button 2 plays 1.wav
-                playPauseAudio(currentAudio);
-                progressBar.value = 0; // Reset the progress bar
-                isPlaying = true;
+                currentAudio.play();
+                playPauseBtn.textContent = "Play"; // Keep the "Play" button text
+                isPlaying = false;
             });
 
             // Play the "Play" button audio as audio2.wav
@@ -188,10 +199,15 @@
 
             // Play button for audio 3 (plays 3.wav)
             document.getElementById("playAudio3").addEventListener("click", function() {
-                currentAudio = audioFiles[3];
-                playPauseAudio(currentAudio);
-                progressBar.value = 0; // Reset the progress bar
-                isPlaying = true;
+                // Stop current audio if any is playing
+                if (currentAudio && currentAudio !== audioFiles.audio2) {
+                    currentAudio.pause();
+                }
+
+                currentAudio = audioFiles[3]; // Button 3 plays 3.wav
+                currentAudio.play();
+                playPauseBtn.textContent = "Play"; // Keep the "Play" button text
+                isPlaying = false;
             });
         });
 
