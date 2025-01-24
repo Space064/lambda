@@ -76,6 +76,7 @@
     </style>
     <script>
         let audio; // Declare globally
+        let isPlaying = false; // Track if audio is playing
 
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize audio variables for 1.wav, 2.wav, 3.wav, and audio2.wav
@@ -104,8 +105,10 @@
             function playPauseAudio(file) {
                 if (file.paused) {
                     file.play();
+                    playPauseBtn.textContent = "Pause"; // Change button text to Pause
                 } else {
                     file.pause();
+                    playPauseBtn.textContent = "Play"; // Change button text to Play
                 }
             }
 
@@ -113,6 +116,8 @@
             audioFiles.audio2.addEventListener("ended", function() {
                 progressBar.value = 0; // Reset progress bar
                 updateTimeDisplay(0, audioFiles.audio2.duration);
+                playPauseBtn.textContent = "Play"; // Reset button text to Play
+                isPlaying = false;
             });
 
             // Update progress bar and timer as audio plays (only for audio2.wav)
@@ -160,6 +165,7 @@
             document.getElementById("playAudio1").addEventListener("click", function() {
                 currentAudio = audioFiles[1]; // Button 1 plays 2.wav
                 playPauseAudio(currentAudio);
+                isPlaying = true;
             });
 
             // Button "2" now plays 1.wav
@@ -167,12 +173,17 @@
                 currentAudio = audioFiles[2]; // Button 2 plays 1.wav
                 playPauseAudio(currentAudio);
                 progressBar.value = 0; // Reset the progress bar
+                isPlaying = true;
             });
 
             // Play the "Play" button audio as audio2.wav
             playPauseBtn.addEventListener("click", function() {
-                currentAudio = audioFiles.audio2;
-                playPauseAudio(currentAudio);
+                if (currentAudio === audioFiles.audio2) {
+                    playPauseAudio(audioFiles.audio2);
+                } else {
+                    currentAudio = audioFiles.audio2;
+                    playPauseAudio(currentAudio);
+                }
             });
 
             // Play button for audio 3 (plays 3.wav)
@@ -180,6 +191,7 @@
                 currentAudio = audioFiles[3];
                 playPauseAudio(currentAudio);
                 progressBar.value = 0; // Reset the progress bar
+                isPlaying = true;
             });
         });
 
