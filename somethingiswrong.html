@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>err_4465</title>
+    <title>somethingiswrong</title>
     <style>
         body {
             background-color: black;
@@ -13,6 +13,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             flex-direction: column;
+            position: relative;
         }
 
         .container {
@@ -26,6 +27,13 @@
 
         button {
             cursor: pointer;
+        }
+
+        .hidden-text {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: black;
         }
     </style>
     <script>
@@ -47,5 +55,6 @@
         <input type="text" id="password">
         <button onclick="checkPassword()">Submit</button>
     </div>
+    <div class="hidden-text">hiddeninthedark</div>
 </body>
 </html>
