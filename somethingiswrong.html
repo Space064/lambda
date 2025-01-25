@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>err_4465</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
 
+        .container {
+            text-align: center;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        async function checkPassword() {
+            const response = await fetch('pass4.html');
+            const correctPass = await response.text();
+            const userInput = document.getElementById('password').value;
+
+            if (userInput.trim() === correctPass.trim()) {
+                window.location.href = 'vid.html';
+            } else {
+                alert('Incorrect password. Try again!');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+</body>
+</html>
