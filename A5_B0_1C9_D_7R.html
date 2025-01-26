@@ -3,6 +3,7 @@
 <head>
     <title>Time is of the essence</title>
     <style>
+        /* Full-page centering */
         body {
             background-color: black;
             color: white;
@@ -19,27 +20,31 @@
             text-align: center;
         }
 
+        /* Keyword section */
         .keyword-container {
-            margin-bottom: 40px;
+            margin-bottom: 40px; /* More space between keyword input and audio controls */
         }
 
+        /* Audio controls wrapper box */
         .audio-controls-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            border: 2px solid #aaa;
+            border: 2px solid #aaa; /* Thin grey border */
             padding: 20px;
             border-radius: 10px;
-            background-color: #222;
+            background-color: #222; /* Slightly darker background */
         }
 
+        /* Arrange play button, progress bar, and timer in one row */
         .progress-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 10px; /* Space between elements */
         }
 
+        /* Style input, buttons, and sliders */
         input, button {
             padding: 10px;
             font-size: 16px;
@@ -49,26 +54,97 @@
             cursor: pointer;
         }
 
+        /* Progress bar */
         #progress {
             width: 200px;
         }
 
+        /* Volume control */
         #volume {
             width: 100px;
         }
 
+        /* Volume percentage */
         #volume-percentage {
             margin-left: 10px;
         }
     </style>
     <script>
+        let audio; // Declare globally
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize audio
+            audio = new Audio('long.wav'); // Changed file name to audio1.wav
+            audio.volume = 1.0; // Default volume at 100%
+            audio.loop = false; // Disable looping
+            
+            const playPauseBtn = document.getElementById("playPauseBtn");
+            const progressBar = document.getElementById("progress");
+            const volumeSlider = document.getElementById("volume");
+            const volumePercentage = document.getElementById("volume-percentage");
+            const timeDisplay = document.getElementById("timeDisplay");
+
+            // Play/Pause functionality
+            playPauseBtn.addEventListener("click", function() {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.textContent = "Pause";
+                } else {
+                    audio.pause();
+                    playPauseBtn.textContent = "Play";
+                }
+            });
+
+            // Reset button to "Play" when music ends
+            audio.addEventListener("ended", function() {
+                playPauseBtn.textContent = "Play";
+                progressBar.value = 0; // Reset progress bar
+                updateTimeDisplay(0, audio.duration);
+            });
+
+            // Update progress bar and timer as audio plays
+            audio.addEventListener("timeupdate", function() {
+                progressBar.value = (audio.currentTime / audio.duration) || 0;
+                updateTimeDisplay(audio.currentTime, audio.duration);
+            });
+
+            // Seek to new position when progress bar is changed
+            progressBar.addEventListener("input", function() {
+                audio.currentTime = progressBar.value * audio.duration;
+            });
+
+            // Volume control
+            volumeSlider.addEventListener("input", function() {
+                audio.volume = this.value;
+                volumePercentage.textContent = `${Math.round(this.value * 100)}%`; // Update volume percentage
+            });
+
+            // Function to update time display (mm:ss format)
+            function updateTimeDisplay(currentTime, duration) {
+                const formatTime = (time) => {
+                    const minutes = Math.floor(time / 60);
+                    const seconds = Math.floor(time % 60);
+                    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+                };
+                timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+            }
+
+            // Set initial time display
+            audio.addEventListener("loadedmetadata", function() {
+                updateTimeDisplay(0, audio.duration);
+            });
+
+            // Set initial volume percentage
+            volumePercentage.textContent = "100%";
+        });
+
         async function checkPassword() {
             const response = await fetch('pass5.html');
             const correctPass = await response.text();
             const userInput = document.getElementById('password').value;
 
             if (userInput.trim() === correctPass.trim()) {
-                window.location.href = 'puzzle1.html';
+                window.location.href = '0213.html';
             } else {
                 alert('Incorrect password. Try again!');
             }
@@ -77,19 +153,23 @@
 </head>
 <body>
     <div class="container">
+        <!-- Keyword Section -->
         <div class="keyword-container">
             <input type="text" id="password">
             <button onclick="checkPassword()">Submit</button>
         </div>
 
+        <!-- Audio Controls Section wrapped in a box -->
         <div class="audio-controls-wrapper">
             <button id="playPauseBtn">Play</button>
 
+            <!-- Progress Bar and Timer -->
             <div class="progress-container">
                 <input type="range" id="progress" min="0" max="1" step="0.01" value="0">
                 <span id="timeDisplay">0:00 / 0:00</span>
             </div>
 
+            <!-- Volume Slider and Percentage -->
             <div class="progress-container">
                 <label for="volume">Volume:</label>
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
