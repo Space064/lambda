@@ -47,14 +47,21 @@
     </style>
     <script>
         async function checkPassword() {
-            const response = await fetch('pass6.html');
-            const correctPass = await response.text();
             const userInput = document.getElementById('password').value;
 
-            if (userInput.trim() === correctPass.trim()) {
-                window.location.href = 'unforseen.html';
+            // If input is GtRckRlld, redirect to the YouTube video
+            if (userInput.trim() === 'GtRckRlld') {
+                window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
             } else {
-                alert('Incorrect password. Try again!');
+                // If not, continue checking against pass6.html
+                const response = await fetch('pass6.html');
+                const correctPass = await response.text();
+
+                if (userInput.trim() === correctPass.trim()) {
+                    window.location.href = 'unforseen.html';
+                } else {
+                    alert('Incorrect password. Try again!');
+                }
             }
         }
 
