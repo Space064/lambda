@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /* Image styles */
+        .interactive-image {
+            width: 150px; 
+            height: 150px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        async function checkPassword() {
+            const response = await fetch('pass6.html');
+            const correctPass = await response.text();
+            const userInput = document.getElementById('password').value;
+
+            if (userInput.trim() === correctPass.trim()) {
+                window.location.href = 'unforseen.html';
+            } else {
+                alert('Incorrect password. Try again!');
+            }
+        }
+
+        function hoverImage(element) {
+            if (element.dataset.clicked !== "true") {
+                element.src = 'red.png';
+            }
+        }
+
+        function resetImage(element) {
+            if (element.dataset.clicked !== "true") {
+                element.src = 'b.png';
+            }
+        }
+
+        function clickImage(element) {
+            element.src = 'real.png';
+            element.dataset.clicked = "true";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="password">
+        <button onclick="checkPassword()">Submit</button>
+
+        <!-- Interactive image -->
+        <img src="b.png" alt="Interactive" class="interactive-image" 
+            onmouseover="hoverImage(this)" 
+            onmouseout="resetImage(this)" 
+            onclick="clickImage(this)" 
+            data-clicked="false">
+    </div>
+</body>
+</html>
