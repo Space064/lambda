@@ -19,12 +19,16 @@
             text-align: center;
         }
 
+        /* Add spacing between input/button and image */
+        .input-container {
+            margin-bottom: 20px;
+        }
+
         /* Image styles */
         .interactive-image {
             width: 952px;
             height: 500px;
             cursor: pointer;
-            margin-top: 20px; /* Adds space between the input box and image */
         }
     </style>
     <script>
@@ -60,8 +64,11 @@
 </head>
 <body>
     <div class="container">
-        <input type="text" id="password">
-        <button onclick="checkPassword()">Submit</button>
+        <!-- Input box and submit button wrapped in a div for proper spacing -->
+        <div class="input-container">
+            <input type="text" id="password">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
 
         <!-- Interactive image -->
         <img src="b.png" alt="Interactive" class="interactive-image" 
