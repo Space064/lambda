@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /* YouTube video embed styling */
+        .video-container {
+            width: 560px;
+            height: 315px;
+            margin-bottom: 20px; /* Space between video and input */
+        }
+
+        /* Input and button styling */
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px; /* Fixed width */
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            width: auto; /* Fits text size */
+            cursor: default; /* Keeps the default cursor */
+        }
+    </style>
+    <script>
+        async function checkPassword() {
+            const response = await fetch('pass7.html');
+            const correctPass = await response.text();
+            const userInput = document.getElementById('password').value;
+
+            if (userInput.trim() === correctPass.trim()) {
+                window.location.href = 'fbc.html';
+            } else {
+                alert('Incorrect password. Try again!');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- YouTube Video Embed -->
+        <div class="video-container">
+            <iframe width="560" height="315" 
+                src="https://www.youtube.com/embed/ROFoj_dJH68?si=vF80L1iUzQT8h9X_" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Input box and submit button -->
+        <div>
+            <input type="text" id="password">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+    </div>
+</body>
+</html>
