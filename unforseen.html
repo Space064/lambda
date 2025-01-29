@@ -17,26 +17,34 @@
 
         .container {
             text-align: center;
+            width: 100%;
         }
 
-        /* YouTube video embed styling */
+        /* YouTube video embed - nearly fullscreen */
         .video-container {
-            width: 560px;
-            height: 315px;
-            margin-bottom: 20px; /* Space between video and input */
+            width: 90vw;
+            height: 75vh;
+            max-width: 1600px;
+            max-height: 85vh;
+            margin-bottom: 20px; /* Space for input field */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
         }
 
         /* Input and button styling */
         input {
             padding: 10px;
-            font-size: 16px;
-            width: 200px; /* Fixed width */
+            font-size: 18px;
+            width: 250px;
         }
 
         button {
             padding: 10px;
-            font-size: 16px;
-            width: auto; /* Fits text size */
+            font-size: 18px;
+            width: auto;
             cursor: default; /* Keeps the default cursor */
         }
     </style>
@@ -58,7 +66,7 @@
     <div class="container">
         <!-- YouTube Video Embed -->
         <div class="video-container">
-            <iframe width="560" height="315" 
+            <iframe 
                 src="https://www.youtube.com/embed/ROFoj_dJH68?si=vF80L1iUzQT8h9X_" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
