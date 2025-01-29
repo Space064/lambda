@@ -17,21 +17,6 @@
 
         .container {
             text-align: center;
-            width: 100%;
-        }
-
-        /* YouTube video embed - nearly fullscreen */
-        .video-container {
-            width: 90vw;
-            height: 75vh;
-            max-width: 1600px;
-            max-height: 85vh;
-            margin-bottom: 20px; /* Space for input field */
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
         }
 
         /* Input and button styling */
@@ -46,6 +31,12 @@
             font-size: 18px;
             width: auto;
             cursor: default; /* Keeps the default cursor */
+        }
+
+        /* Text styling */
+        .code {
+            font-size: 24px;
+            margin-bottom: 20px; /* Space between text and input field */
         }
     </style>
     <script>
@@ -64,15 +55,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- YouTube Video Embed -->
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/ROFoj_dJH68?si=vF80L1iUzQT8h9X_" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
+        <!-- Display the code -->
+        <div class="code">ROFoj_dJH68</div>
 
         <!-- Input box and submit button -->
         <div>
