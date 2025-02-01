@@ -4,7 +4,7 @@
     <title>A bit harder this time</title>
     <style>
         body {
-            background: url('bg.png') no-repeat center center fixed;
+            background: url('harder.png') no-repeat center center fixed;
             background-size: cover;
             color: white;
             display: flex;
@@ -36,12 +36,12 @@
     </style>
     <script>
         async function checkPassword() {
-            const response = await fetch('pass8.html');
+            const response = await fetch('pass9.html');
             const correctPass = await response.text();
             const userInput = document.getElementById('password').value;
 
             if (userInput.trim() === correctPass.trim()) {
-                window.location.href = 'Ye0754.html';
+                window.location.href = 'gmod.html';
             } else {
                 alert('Incorrect password. Try again!');
             }
