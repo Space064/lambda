@@ -37,7 +37,7 @@
             background-color: #222; /* Slightly darker background */
         }
 
-        /* Arrange play button, progress bar, and timer in one row */
+        /* Arrange play button, download button, progress bar, and timer in one row */
         .progress-container {
             display: flex;
             align-items: center;
@@ -79,6 +79,7 @@
             audio.loop = false; // Disable looping
             
             const playPauseBtn = document.getElementById("playPauseBtn");
+            const downloadBtn = document.getElementById("downloadBtn");
             const progressBar = document.getElementById("progress");
             const volumeSlider = document.getElementById("volume");
             const volumePercentage = document.getElementById("volume-percentage");
@@ -161,7 +162,10 @@
 
         <!-- Audio Controls Section wrapped in a box -->
         <div class="audio-controls-wrapper">
-            <button id="playPauseBtn">Play</button>
+            <div class="progress-container">
+                <button id="playPauseBtn">Play</button>
+                <a id="downloadBtn" href="low.wav" download><button>Download</button></a>
+            </div>
 
             <!-- Progress Bar and Timer -->
             <div class="progress-container">
