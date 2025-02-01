@@ -4,7 +4,7 @@
     <title>A bit harder this time</title>
     <style>
         body {
-            background: url('harder.png') no-repeat center center fixed;
+            background: url('gm.png') no-repeat center center fixed;
             background-size: cover;
             color: white;
             display: flex;
@@ -19,42 +19,8 @@
         .container {
             text-align: center;
         }
-
-        /* Input and button styling */
-        input {
-            padding: 10px;
-            font-size: 18px;
-            width: 250px;
-        }
-
-        button {
-            padding: 10px;
-            font-size: 18px;
-            width: auto;
-            cursor: default; /* Keeps the default cursor */
-        }
-    </style>
-    <script>
-        async function checkPassword() {
-            const response = await fetch('pass9.html');
-            const correctPass = await response.text();
-            const userInput = document.getElementById('password').value;
-
-            if (userInput.trim() === correctPass.trim()) {
-                window.location.href = 'gmod.html';
-            } else {
-                alert('Incorrect password. Try again!');
-            }
-        }
     </script>
 </head>
-<body>
-    <div class="container">
-        <!-- Input box and submit button -->
-        <div>
-            <input type="text" id="password">
-            <button onclick="checkPassword()">Submit</button>
-        </div>
-    </div>
+<body>  
 </body>
 </html>
