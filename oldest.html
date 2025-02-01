@@ -139,17 +139,17 @@
             volumePercentage.textContent = "100%";
         });
 
-        async function checkPassword() {
-            const response = await fetch('pass9.html');
-            const correctPass = await response.text();
-            const userInput = document.getElementById('password').value;
+async function checkPassword() {
+    const response = await fetch('pass9.html');
+    const correctPass = await response.text();
+    const userInput = document.getElementById('password').value;
 
-            if (userInput.trim() === correctPass.trim()) {
-                window.location.href = '0213.html';
-            } else {
-                alert('Incorrect password. Try again!');
-            }
-        }
+    if (userInput.trim() === correctPass.trim()) {
+        window.location.href = 'https://www.youtube.com/watch?v=Kc_0ZMb4h2w';  // Redirect to YouTube
+    } else {
+        alert('Incorrect password. Try again!');
+    }
+}
     </script>
 </head>
 <body>
