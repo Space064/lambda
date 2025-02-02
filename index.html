@@ -1,186 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Welcome!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Keyword Site</title>
     <style>
-        /* Full-page centering */
         body {
-            background-image: url('final.png'); /* Set the image as background */
-            background-size: cover; /* Ensure the image covers the entire page */
-            background-position: center; /* Center the background image */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            flex-direction: column;
-        }
-
-        .container {
+            background-image: url('final.png');
+            background-size: cover;
             text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        /* Keyword section */
-        .keyword-container {
-            margin-bottom: 40px; /* More space between keyword input and audio controls */
+        h1 {
+            font-size: 3em;
+            margin-top: 50px;
         }
-
-        /* Audio controls wrapper box */
-        .audio-controls-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            border: 2px solid #aaa; /* Thin grey border */
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(34, 34, 34, 0.8); /* Slightly transparent background */
+        .container {
+            margin-top: 100px;
         }
-
-        /* Arrange play button, progress bar, and timer in one row */
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 10px; /* Space between elements */
-        }
-
-        /* Style input, buttons, and sliders */
-        input, button {
+        input[type="password"] {
             padding: 10px;
-            font-size: 16px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
         }
-
-        button {
+        .button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
             cursor: pointer;
         }
-
-        /* Progress bar */
-        #progress {
-            width: 200px;
+        .button:hover {
+            background-color: #45a049;
         }
-
-        /* Volume control */
-        #volume {
-            width: 100px;
+        .audio-player {
+            margin-top: 30px;
+            text-align: center;
         }
-
-        /* Volume percentage */
-        #volume-percentage {
-            margin-left: 10px;
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            margin-top: 10px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0;
+        }
+        .play-pause {
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
+</head>
+<body>
+
+    <h1>Welcome!</h1>
+
+    <div class="container">
+        <p>Enter the secret keyword:</p>
+        <input type="password" id="password" placeholder="Enter password">
+        <br>
+        <button class="button" onclick="checkPassword()">Submit</button>
+    </div>
+
+    <div class="audio-player">
+        <audio id="audio" src="your-audio-file.mp3" preload="auto"></audio>
+        <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+        </div>
+        <div id="current-time">00:00</div>
+        <button class="play-pause" onclick="togglePlayPause()">Play</button>
+    </div>
+
     <script>
-        let audio; // Declare globally
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Initialize audio
-            audio = new Audio('audio1.wav'); // Changed file name to audio1.wav
-            audio.volume = 1.0; // Default volume at 100%
-            audio.loop = false; // Disable looping
-            
-            const playPauseBtn = document.getElementById("playPauseBtn");
-            const progressBar = document.getElementById("progress");
-            const volumeSlider = document.getElementById("volume");
-            const volumePercentage = document.getElementById("volume-percentage");
-            const timeDisplay = document.getElementById("timeDisplay");
-
-            // Play/Pause functionality
-            playPauseBtn.addEventListener("click", function() {
-                if (audio.paused) {
-                    audio.play();
-                    playPauseBtn.textContent = "Pause";
-                } else {
-                    audio.pause();
-                    playPauseBtn.textContent = "Play";
-                }
-            });
-
-            // Reset button to "Play" when music ends
-            audio.addEventListener("ended", function() {
-                playPauseBtn.textContent = "Play";
-                progressBar.value = 0; // Reset progress bar
-                updateTimeDisplay(0, audio.duration);
-            });
-
-            // Update progress bar and timer as audio plays
-            audio.addEventListener("timeupdate", function() {
-                progressBar.value = (audio.currentTime / audio.duration) || 0;
-                updateTimeDisplay(audio.currentTime, audio.duration);
-            });
-
-            // Seek to new position when progress bar is changed
-            progressBar.addEventListener("input", function() {
-                audio.currentTime = progressBar.value * audio.duration;
-            });
-
-            // Volume control
-            volumeSlider.addEventListener("input", function() {
-                audio.volume = this.value;
-                volumePercentage.textContent = `${Math.round(this.value * 100)}%`; // Update volume percentage
-            });
-
-            // Function to update time display (mm:ss format)
-            function updateTimeDisplay(currentTime, duration) {
-                const formatTime = (time) => {
-                    const minutes = Math.floor(time / 60);
-                    const seconds = Math.floor(time % 60);
-                    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-                };
-                timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            if (password === "pass1") {
+                window.location.href = "puzzle1.html";
+            } else if (password === "pass10") {
+                window.location.href = "thefinale.html";
+            } else {
+                alert("Incorrect password!");
             }
+        }
 
-            // Set initial time display
-            audio.addEventListener("loadedmetadata", function() {
-                updateTimeDisplay(0, audio.duration);
-            });
+        var audio = document.getElementById('audio');
+        var playPauseButton = document.querySelector('.play-pause');
+        var progress = document.getElementById('progress');
+        var currentTime = document.getElementById('current-time');
 
-            // Set initial volume percentage
-            volumePercentage.textContent = "100%";
+        audio.addEventListener('timeupdate', function() {
+            var current = audio.currentTime;
+            var duration = audio.duration;
+            var progressPercentage = (current / duration) * 100;
+            progress.style.width = progressPercentage + '%';
+
+            var minutes = Math.floor(current / 60);
+            var seconds = Math.floor(current % 60);
+            currentTime.textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
         });
 
-        // Password check function
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            
-            if (password === 'pass1') {
-                window.location.href = 'puzzle1.html'; // Redirect to puzzle1.html
-            } else if (password === 'pass10') {
-                window.location.href = 'thefinale.html'; // Redirect to thefinale.html
+        function formatTime(time) {
+            return time < 10 ? '0' + time : time;
+        }
+
+        function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = 'Pause';
             } else {
-                alert('Incorrect password, please try again.'); // Alert for incorrect password
+                audio.pause();
+                playPauseButton.textContent = 'Play';
             }
         }
     </script>
-</head>
-<body>
-    <div class="container">
-        <!-- Keyword Section -->
-        <div class="keyword-container">
-            <h1>Welcome!</h1>
-            <p>Enter the secret keyword:</p>
-            <input type="text" id="password">
-            <button onclick="checkPassword()">Submit</button>
-        </div>
 
-        <!-- Audio Controls Section wrapped in a box -->
-        <div class="audio-controls-wrapper">
-            <button id="playPauseBtn">Play</button>
-
-            <!-- Progress Bar and Timer -->
-            <div class="progress-container">
-                <input type="range" id="progress" min="0" max="1" step="0.01" value="0">
-                <span id="timeDisplay">0:00 / 0:00</span>
-            </div>
-
-            <!-- Volume Slider and Percentage -->
-            <div class="progress-container">
-                <label for="volume">Volume:</label>
-                <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
-                <span id="volume-percentage">100%</span>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
