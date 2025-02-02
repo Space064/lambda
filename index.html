@@ -140,23 +140,18 @@
             volumePercentage.textContent = "100%";
         });
 
-        async function checkPassword() {
+        // Updated password check function (case-sensitive)
+        function checkPassword() {
             const passwordInput = document.getElementById('password').value.trim();
 
-            // First password check for pass1.html
-            const response1 = await fetch('pass1.html');
-            const correctPass1 = await response1.text();
-
-            if (passwordInput === correctPass1) {
+            // Check for "qube" (case-sensitive)
+            if (passwordInput === "qube") {
                 window.location.href = 'puzzle1.html';
                 return;
             }
 
-            // Second password check for pass10.html
-            const response2 = await fetch('pass10.html');
-            const correctPass2 = await response2.text();
-
-            if (passwordInput === correctPass2) {
+            // Check for "TheFinalStep" (case-sensitive)
+            if (passwordInput === "TheFinalStep") {
                 window.location.href = 'thefinale.html';
                 return;
             }
